@@ -1,24 +1,29 @@
-"""
-Handle LLM queries for prerequisite extraction and enrichment.
-"""
 from llm.llm_client import get_llm_client, create_prerequisite_prompt
+from utils.due_date_manager import DueDateManager
 import logging
 
 logger = logging.getLogger("ComplianceAssistant.QueryHandler")
 
+# Initialize manager
+due_date_manager = DueDateManager()
+
 def extract_prerequisites(search_results, item):
     """
-    Use LLM to extract prerequisites from search results.
+    Use LLM to extract prerequisites and determine due date using DueDateManager.
     
     Args:
         search_results: List of search result dictionaries
         item: Compliance item dictionary
     
     Returns:
-        Extracted prerequisites as formatted text
+        Dictionary with prerequisites, due_date, and metadata
     """
     try:
-        # Initialize LLM
+        # Step 1: Calculate high-confidence due date using DueDateManager
+        logger.info("Calculating intelligent due date...")
+        dd_result = due_date_manager.calculate_due_date(item, search_results)
+        
+        # Step 2: Extract prerequisites using the specialized prompt
         llm = get_llm_client()
         prompt_template = create_prerequisite_prompt()
         
@@ -33,31 +38,27 @@ def extract_prerequisites(search_results, item):
             search_results=formatted_results
         )
         
-        # Invoke LLM
-        logger.info("Invoking LLM for prerequisite and expiry extraction")
+        # Invoke LLM for prerequisites
+        logger.info("Invoking LLM for prerequisite extraction")
         response = llm.invoke(prompt)
         
         # Extract content
         content = response.content
         logger.info("Successfully received LLM response")
         
-        # Parse the structured response
+        # Merge results
         parsed_result = {
             'prerequisites': content,
-            'due_date': None,
-            'validity': None
+            'due_date': dd_result.due_date.strftime('%Y-%m-%d'),
+            'validity': dd_result.validity_period,
+            'confidence': dd_result.confidence,
+            'calculation_method': dd_result.method.value,
+            'calculation_notes': dd_result.calculation_notes,
+            'warning': dd_result.warning
         }
         
+        # Clean up prerequisites text (remove any artifact tags if they still exist)
         import re
-        due_date_match = re.search(r"\[DUE_DATE\]:\s*(\d{4}-\d{2}-\d{2})", content)
-        validity_match = re.search(r"\[VALIDITY_PERIOD\]:\s*(.*)", content)
-        
-        if due_date_match:
-            parsed_result['due_date'] = due_date_match.group(1).strip()
-        if validity_match:
-            parsed_result['validity'] = validity_match.group(1).strip()
-            
-        # Clean up prerequisites text by removing the tags
         clean_prereqs = re.sub(r"\[DUE_DATE\]:.*", "", content)
         clean_prereqs = re.sub(r"\[VALIDITY_PERIOD\]:.*", "", clean_prereqs).strip()
         parsed_result['prerequisites'] = clean_prereqs

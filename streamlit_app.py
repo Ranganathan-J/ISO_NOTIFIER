@@ -296,8 +296,22 @@ with tab1:
         st.markdown("---")
         st.markdown(f"### 📋 Extracted Prerequisites for: {res['title']}")
         
-        # Display due date prominently
-        st.error(f"📅 **DUE DATE: {res['due_date']}**")
+        # Display due date intelligence
+        col_res1, col_res2, col_res3 = st.columns(3)
+        with col_res1:
+            st.metric("Final Due Date", res['due_date'])
+        with col_res2:
+            st.metric("Validity Period", res.get('validity', 'N/A'))
+        with col_res3:
+            conf = res.get('confidence', 0)
+            st.metric("Calculation Confidence", f"{conf:.1%}")
+
+        # Technical Notes
+        with st.expander("🔍 Date Intelligence & Methodology"):
+            st.write(f"**Method:** {res.get('calculation_method', 'Unknown').replace('_', ' ').title()}")
+            st.write(f"**Notes:** {res.get('calculation_notes', 'No notes available.')}")
+            if res.get('warning'):
+                st.warning(f"⚠️ {res['warning']}")
         
         if res['prerequisites']:
             st.info("These prerequisites were researched and extracted using web search + AI.")
@@ -461,8 +475,22 @@ with tab2:
         st.markdown("---")
         st.markdown(f"### 📋 Extracted Prerequisites for: {res['title']}")
         
-        # Display due date prominently
-        st.error(f"📅 **DUE DATE: {res['due_date']}**")
+        # Display due date intelligence
+        col_res1, col_res2, col_res3 = st.columns(3)
+        with col_res1:
+            st.metric("Final Due Date", res['due_date'])
+        with col_res2:
+            st.metric("Validity Period", res.get('validity', 'N/A'))
+        with col_res3:
+            conf = res.get('confidence', 0)
+            st.metric("Calculation Confidence", f"{conf:.1%}")
+
+        # Technical Notes
+        with st.expander("🔍 Date Intelligence & Methodology"):
+            st.write(f"**Method:** {res.get('calculation_method', 'Unknown').replace('_', ' ').title()}")
+            st.write(f"**Notes:** {res.get('calculation_notes', 'No notes available.')}")
+            if res.get('warning'):
+                st.warning(f"⚠️ {res['warning']}")
         
         if res['prerequisites']:
             st.info("These prerequisites were researched and extracted using web search + AI.")
