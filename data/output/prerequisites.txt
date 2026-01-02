@@ -1,0 +1,31 @@
+================================================================================
+ITEM: [ISO] ISO 9001 - Quality Management
+TIMESTAMP: 1766993652.7530434
+----------------------------------------
+Prerequisites for [ISO] ISO 9001 - Quality Management:
+
+Based on web search, please review the following sources:
+
+1. ISO 9001 Auditing Practices Group Guidance on: Scope and ...
+   https://committee.iso.org/files/live/sites/tc176/files/PDF+APG+New+Disclaimer+12-2023/ISO-TC+176-TF_APG-Scope+and+app+rev+12-01-2023+ed1.pdf
+   This paper is a major revision of the earlier paper “Scope of ISO 9001 , Scope of Quality Management System and Scope of Certification ” and replaces it. The current 2023 revision incorporates clarifi...
+
+2. ISO 9001 Standard - Quality Management Systems
+   https://iso9001.com/
+   ISO 9001 certification is the formal recognition that your organization’s QMS meets the requirements of the ISO 9001 standard. It proves to customers, partners, and regulators that you are committed t...
+
+3. Understanding 'Scope' in a Quality Management System
+   https://www.qualitysystems.com/blog/understanding-scope-in-a-quality-management-system/
+   May 21, 2024 · In conclusion, we've examined the different meanings of "scope" in ISO 9001 and how the scope of the standard, management system, certification , and audit all fit together. Understandi...
+
+4. ISO 9001: Definition, Requirements, Implementation, Certification
+   https://simplerqms.com/iso-9001/
+   Jun 16, 2025 · ISO 9001 provides a framework for consistently delivering quality products and services through structured processes, risk-based thinking, and continual improvement. The current version...
+
+5. ISO 9001:2015 – How to determine the scope of your QMS 'Comprehensive Guide Scope Exclusions to ISO 9001 ... ISO 9001 Certification - Everything You Need To Know 'Comprehensive Guide Scope Exclusions to ISO 9001 Certification and … ISO 9001 Standard - Quality Management Systems ISO 9001 : Definition, Requirements , Implementation, Certification 'Comprehensive Guide Scope Exclusions to ISO 9001 Certification and …
+   https://advisera.com/9001academy/knowledgebase/how-to-define-the-scope-of-the-qms-according-to-iso-90012015/
+   Section 4.3 of the standard details the requirements for determining the scope of the Quality Management System. In a note about the QMS, it is stated that the QMS can include the whole organization, ...
+
+
+================================================================================
+

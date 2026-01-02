@@ -1,0 +1,37 @@
+# Excel file paths
+excel:
+  submissions_path: "data/excel/new_submissions.xlsx"
+  master_path: "data/excel/master_compliance.xlsx"
+  template_path: "forms/form_template.xlsx"
+
+# Web scraping settings
+scraper:
+  max_results: 5
+  timeout: 30
+  retry_attempts: 3
+  rate_limit_delay: 2  # seconds between requests
+
+# LLM settings
+llm:
+  model: "mixtral-8x7b-32768"  # Groq model
+  temperature: 0.3
+  max_tokens: 1000
+  embedding_model: "text-embedding-3-small"  # OpenAI embeddings
+
+# Vector store
+vector_store:
+  type: "chroma"  # or "faiss"
+  persist_directory: "data/vector_store"
+  collection_name: "compliance_items"
+
+# Notification settings
+notifications:
+  batch_size: 10
+  delay_between_emails: 2  # seconds
+  
+# Logging
+logging:
+  level: "INFO"
+  log_file: "logs/compliance_assistant.log"
+  max_file_size_mb: 10
+  backup_count: 5

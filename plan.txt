@@ -1,0 +1,83 @@
+compliance_assistant/
+├── README.md
+├── requirements.txt
+├── .env                  # Secrets like MSAL client ID, secret, tenant ID
+├── main.py               # Orchestrates the workflow
+├── config/
+│   ├── config.yaml       # Configurable parameters (Excel path, search limits)
+│   └── logging_config.py
+├── data/
+│   ├── excel/            # Stores compliance input files
+│   ├── raw/              # Raw web-scraped data
+│   └── processed/        # Cleaned / enriched data
+├── forms/
+│   └── form_template.xlsx  # Template for compliance team input
+├── scrapers/
+│   ├── __init__.py
+│   └── web_search_scraper.py   # DuckDuckGo search + parse
+├── llm/
+│   ├── __init__.py
+│   ├── llm_client.py          # Initialize LangChain model
+│   ├── retriever.py           # Vector store setup with langchain-groq
+│   └── query_handler.py       # Handle queries + enrich data
+├── notifications/
+│   ├── __init__.py
+│   └── outlook_notifier.py    # MSAL + Graph API integration
+├── utils/
+│   ├── __init__.py
+│   ├── excel_utils.py         # Read/write/check Excel data
+│   ├── data_cleaning.py
+│   └── helpers.py
+└── tests/
+    ├── test_scraper.py
+    ├── test_llm.py
+    └── test_notifications.py
+
+
+
+prompt: You are an AI software architect. I want you to design a **production-ready Python workflow** for a Compliance Assistant application. The requirements are as follows:
+
+**Goal:**  
+The application helps a compliance team track prerequisites and notifications for compliance items. It uses LLMs and web scraping to enrich data, and sends notifications through Outlook.
+
+**Requirements / Workflow:**
+1. The compliance team submits items via forms (like Excel form entries) containing fields such as:
+   - Title
+   - Description
+   - Responsible Email
+   - Due Date
+2. The application should store the submitted items in Excel (or a database).
+3. For each item:
+   - Check if the item already exists in the master compliance list.
+   - If it exists, skip or log it.
+   - If it does not exist:
+     - Use web search (DuckDuckGo) to find relevant prerequisites.
+     - Use an LLM (via LangChain) to summarize or extract prerequisites.
+     - Store the enriched information in a vector store (LangChain-Groq) for future queries.
+4. Send notifications via Outlook to responsible users with the enriched prerequisites.
+5. Provide a modular, production-ready structure, including:
+   - Folder structure
+   - Python module separation (scraper, LLM, notifications, utils, tests)
+   - Sample code snippets for main orchestration, Excel read/write, web scraping, LLM query handling, and Outlook notifications
+6. Include logging, error handling, and the ability to extend to more compliance sources in the future.
+7. Use Python 3.11, latest LangChain, LangChain-Groq, MSAL for Outlook, DuckDuckGo search.
+
+**Deliverables:**
+- High-level architecture description.
+- Detailed folder structure.
+- Skeleton Python code for each module.
+- Sample main orchestration file showing end-to-end workflow.
+- Explanations/comments so a junior developer can continue building on it.
+
+**Constraints:**
+- The code should be clear, modular, and ready for production extension.
+- Focus on simplicity first, but include hooks for vector store integration and LLM enrichment.
+- No need for a full UI, but ensure it can be integrated later.
+
+Generate the output in a structured way with sections:
+1. Architecture Overview
+2. Folder Structure
+3. Module Descriptions
+4. Skeleton Code Examples
+5. Sample Orchestration Flow
+6. Guidelines for Junior Developer
